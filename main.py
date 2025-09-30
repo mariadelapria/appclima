@@ -9,6 +9,9 @@ from io import BytesIO
 
 st.title("Clima Tempo")
 
+
+API_key = st.secrets["OPENWEATHER_API_KEY"] 
+
 cidade = st.text_input("Busque uma cidade:")
 
 icone_path = "imagem/previsaoclima.png"
@@ -25,7 +28,7 @@ temp = "–"
 vento_kmh = "–"
 
 if st.button("Buscar clima") and cidade:
-    resultado = clima_atual(cidade)
+    resultado = clima_atual(cidade, API_key)
     if resultado:
         cidade, temp, vento_kmh, desc, lat, lon = resultado
         vento_kmh = f"{float(vento_kmh):.1f} km/h"
@@ -46,7 +49,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 if cidade and desc != "–":
-    previsoes = previsao_5dias(cidade)
+    previsoes = previsao_5dias(cidade, API_key)
     if previsoes:
         previsoes_restantes = list(previsoes.items())[1:]
 
@@ -65,7 +68,7 @@ if cidade and desc != "–":
             img_b64 = base64.b64encode(buffered.getvalue()).decode()
 
             st.markdown(f"""
-            <div class="previsao-box-mini" style="background-color: rgba(58,138,175,0.2); border-radius: 10px; padding: 10px; margin: 5px; display: flex; align-items: center; width: 700px;">
+            <div class="previsao-box-mini" style="background-color: rgba(58,138,175,0.2); border-radius: 10px; padding: 10px; margin: 5px; display: flex; align-items: center; width: 500px;">
                 <img src="data:image/png;base64,{img_b64}" style="width:50px; height:50px; margin-right: 10px;">
                 <div style="display: flex; flex-direction: column;">
                     <span style="font-weight:bold;">{dia}</span>
