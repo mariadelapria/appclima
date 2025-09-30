@@ -104,6 +104,149 @@ h1 {
     [data-testid="stPlotlyChart"] {
         max-width: 650px;    /* PC */
     }
+}/* ===== Gradiente de fundo da aplicação ===== */
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(to bottom,   
+        #FFF3E6 0%,   
+        #D9F0FF 20%,  
+        #A7D8FF 45%, 
+        #FFD6A6 70%,  
+        #8EA7D9 85%);
+    color: #005969;   
+}
+
+/* ===== Estilo do título principal ===== */
+h1 {
+    font-size: 200px;              
+    font-weight: bold;      
+    text-align: center;     
+    margin-bottom: 20px;   
+}
+
+/* ===== Container externo das caixas ===== */
+.previsao-container {
+    display: flex;
+    flex-wrap: wrap;      
+    gap: 20px;            /* aumenta espaçamento entre caixas */
+    justify-content: center;
+    overflow-x: auto; 
+    margin: 0 auto;
+    padding-bottom: 20px; /* adiciona espaçamento inferior */
+}
+
+/* ===== Caixa principal ===== */
+.previsao-box {
+    background-color: rgba(58,138,175,0.2);
+    border-radius: 10px; 
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;  /* centraliza conteúdo verticalmente */
+    width: 650px;          /* PC */
+    max-width: 90vw;       /* celular */
+    margin: 10px auto;     /* espaçamento entre caixas */
+    gap: 20px;             /* espaço entre conteúdo e imagem */
+}
+
+.previsao-box .texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.previsao-box .texto h1 {
+    font-size: 50px;
+    margin: 0;
+}
+
+.previsao-box .texto h3 {
+    margin: 0;
+    font-size: 40px;    
+    color: #ffffff;     
+    font-weight: bold;   
+}
+
+.previsao-box .texto p {
+    margin: 0;
+    font-size: 24px;     
+    color: #ffffff;      
+}
+
+.previsao-box img.icon {
+    height: 200px;  /* ícone maior no PC */
+    width: auto;
+}
+
+/* ===== Caixa mini da previsão diária (5 dias) ===== */
+.previsao-box-mini {
+    background-color: rgba(58,138,175,0.2);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;     
+    align-items: center;
+    width: 650px;       /* PC */
+    max-width: 90vw;    /* celular */
+    gap: 15px;          /* espaçamento entre elementos */
+    margin: 10px auto;  /* adiciona espaçamento entre caixas */
+}
+
+.previsao-box-mini .texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.previsao-box-mini .texto span:first-child {
+    font-weight: bold;
+}
+
+/* ===== Gráficos responsivos ===== */
+[data-testid="stPlotlyChart"] {
+    width: 100% !important;  
+    height: auto !important;
+    margin-bottom: 20px;     /* espaçamento abaixo do gráfico */
+}
+
+/* ===== Tamanhos de gráficos por dispositivo ===== */
+@media (min-width: 768px) {
+    [data-testid="stPlotlyChart"] {
+        max-width: 650px;    /* PC */
+    }
+}
+
+@media (max-width: 767px) {
+    [data-testid="stPlotlyChart"] {
+        max-width: 400px;    /* celular */
+    }
+    .previsao-box {
+        flex-direction: column;   
+        align-items: center;
+        padding: 15px;
+    }
+    .previsao-box .texto h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 5px;   /* título mais próximo do topo */
+    }
+    .previsao-box .texto h3,
+    .previsao-box .texto p {
+        font-size: 18px;
+        text-align: center;
+    }
+    .previsao-box img.icon {
+        height: 150px;        /* ícone maior no celular */
+        margin-top: 10px;
+    }
+    .previsao-box-mini {
+        width: 90vw;
+        margin: 10px 0;       /* espaçamento entre caixas mini */
+    }
+}
+
+/* ===== Reset geral ===== */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 @media (max-width: 767px) {
