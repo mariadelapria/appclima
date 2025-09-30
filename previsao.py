@@ -1,12 +1,8 @@
 import requests
-import time 
-import streamlit as st
+import time
 
-API_key = st.secrets["general"]["OPENWEATHER_API_KEY"]
-
-
-def previsao_5dias(cidade):
-    url_5dias = f"http://api.openweathermap.org/data/2.5/forecast?q={cidade}&appid={API_key}&units=metric&lang=pt_br"
+def previsao_5dias(cidade, api_key):
+    url_5dias = f"http://api.openweathermap.org/data/2.5/forecast?q={cidade}&appid={api_key}&units=metric&lang=pt_br"
     res_5dias = requests.get(url_5dias).json()
 
     if res_5dias.get("cod") != "200":
@@ -34,5 +30,4 @@ def previsao_5dias(cidade):
         info = previsoes[dia]
         print(f"{dia:<12} | {info['desc']:<15} | {info['temp_min']:<8.1f} | {info['temp_max']:<8.1f}")
     
-   
     return previsoes
