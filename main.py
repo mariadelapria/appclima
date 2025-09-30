@@ -2,6 +2,7 @@ import streamlit as st
 from clima import clima_atual
 from previsao import previsao_5dias
 from graficos import df_previsao_5dias, plot_temp_5dias, analises_5dias_graficos
+import pandas as pd
 from PIL import Image
 import base64
 from io import BytesIO
@@ -34,9 +35,9 @@ if st.button("Buscar clima") and cidade:
         st.warning("Não foi possível obter o clima desta cidade.")
         temp = vento_kmh = desc = "–"
 
-# Box principal do clima
+# Caixa principal com responsividade
 st.markdown(f"""
-<div class="previsao-box" style="max-width:500px; margin:auto;">
+<div class="previsao-box" style="width: 90%; max-width: 500px; min-width: 400px;">
     <div class="texto">
         <h1 style="margin:0; text-align:left; font-size:50px;">{cidade}</h1>
         <h3 style="margin:0;">Clima: {desc}</h3>
@@ -66,8 +67,9 @@ if cidade and desc != "–":
             img.save(buffered, format="PNG")
             img_b64 = base64.b64encode(buffered.getvalue()).decode()
 
+            # Caixa mini com responsividade
             st.markdown(f"""
-            <div class="previsao-box-mini" style="background-color: rgba(58,138,175,0.2); border-radius: 10px; padding: 10px; margin: 5px; display: flex; align-items: center; max-width:500px; width:100%; margin-left:auto; margin-right:auto;">
+            <div class="previsao-box-mini" style="background-color: rgba(58,138,175,0.2); border-radius: 10px; padding: 10px; margin: 5px; display: flex; align-items: center; width: 90%; max-width: 500px; min-width: 400px;">
                 <img src="data:image/png;base64,{img_b64}" style="width:50px; height:50px; margin-right: 10px;">
                 <div style="display: flex; flex-direction: column;">
                     <span style="font-weight:bold;">{dia}</span>
@@ -79,9 +81,9 @@ if cidade and desc != "–":
 
         df_grafico = df_previsao_5dias(dict(previsoes_restantes), cidade)
         fig_temp = plot_temp_5dias(df_grafico)
-        st.plotly_chart(fig_temp, use_container_width=True)
+        st.plotly_chart(fig_temp)
 
         st.subheader("Análises dos próximos 5 dias")
         figs_analises = analises_5dias_graficos(df_grafico)
         for f in figs_analises:
-            st.plotly_chart(f, use_container_width=True)
+            st.plotly_chart(f)

@@ -2,6 +2,9 @@ import pandas as pd
 import plotly.graph_objects as go
 
 def df_previsao_5dias(previsoes, cidade):
+    """
+    Converte o dict de previsões em DataFrame para gráficos
+    """
     df = pd.DataFrame([
         {"data": dia, 
          "desc": info["desc"], 
@@ -15,6 +18,7 @@ def df_previsao_5dias(previsoes, cidade):
 def plot_temp_5dias(df):
     fig = go.Figure()
 
+    # Linha Temp Máx
     fig.add_trace(go.Scatter(
         x=df['data'],
         y=df['temp_max'],
@@ -23,6 +27,7 @@ def plot_temp_5dias(df):
         line=dict(color='#ff914d', width=3)
     ))
 
+    # Linha Temp Mín
     fig.add_trace(go.Scatter(
         x=df['data'],
         y=df['temp_min'],
@@ -31,6 +36,7 @@ def plot_temp_5dias(df):
         line=dict(color='#0097b2', width=3)
     ))
 
+    # Layout com fundo transparente e responsivo
     fig.update_layout(
         title=f"Temperaturas em {df['cidade'].iloc[0]}",
         xaxis_title="Data",
@@ -38,15 +44,16 @@ def plot_temp_5dias(df):
         template="plotly_white",
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        margin=dict(t=50, b=50, l=50, r=50),
-        autosize=True
+        autosize=True,
+        width=None,  # responsivo
     )
+
     return fig
 
 def analises_5dias_graficos(df):
     figs = []
 
-    # Dia mais quente
+    # 1. Dia mais quente
     df_max = df.loc[df['temp_max'].idxmax()]
     fig1 = go.Figure(go.Indicator(
         mode="gauge+number",
@@ -58,10 +65,16 @@ def analises_5dias_graficos(df):
                'borderwidth': 3,
                'bordercolor': "#ff914d"}
     ))
-    fig1.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", margin=dict(t=50,b=50,l=50,r=50), autosize=True)
+    fig1.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(t=50, b=50, l=50, r=50),
+        autosize=True,
+        width=None,
+    )
     figs.append(fig1)
 
-    # Dia mais frio
+    # 2. Dia mais frio
     df_min = df.loc[df['temp_min'].idxmin()]
     fig2 = go.Figure(go.Indicator(
         mode="gauge+number",
@@ -73,10 +86,16 @@ def analises_5dias_graficos(df):
                'borderwidth': 3,
                'bordercolor': "#0097b2"}
     ))
-    fig2.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", margin=dict(t=50,b=50,l=50,r=50), autosize=True)
+    fig2.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(t=50, b=50, l=50, r=50),
+        autosize=True,
+        width=None,
+    )
     figs.append(fig2)
 
-    # Temperatura média
+    # 3. Temperatura média da semana
     temp_min_media = df['temp_min'].mean()
     temp_max_media = df['temp_max'].mean()
     fig3 = go.Figure(go.Bar(
@@ -86,9 +105,14 @@ def analises_5dias_graficos(df):
         marker_line_color="#ffffff",
         marker_line_width=2
     ))
-    fig3.update_layout(title="Temperatura média nos próximos 5 dias",
-                       paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                       margin=dict(t=50,b=50,l=50,r=50), autosize=True)
+    fig3.update_layout(
+        title="Temperatura média nos próximos 5 dias",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(t=50, b=50, l=50, r=50),
+        autosize=True,
+        width=None,
+    )
     figs.append(fig3)
 
     return figs
