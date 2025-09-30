@@ -1,0 +1,77 @@
+/* Gradiente de fundo da aplicação */
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(to bottom,   
+    #FFF3E6 0%,   /* amanhecer: pêssego muito claro */
+    #D9F0FF 20%,  /* manhã: céu pálido */
+    #A7D8FF 45%,  /* meio-dia: azul suave */
+    #FFD6A6 70%,  /* golden hour: dourado suave */
+    #8EA7D9 85% );
+    color: #005969;   
+}
+/* Estilo do título principal */
+h1 {
+    font-size: 200px;       /* tamanho do título */       
+    font-weight: bold;      /* negrito */
+    text-align: center;     /* centralizado */
+    margin-bottom: 20px;    /* espaço abaixo do título */
+}
+/* Container externo para manter as caixas em linha */
+.previsao-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* permite scroll horizontal */
+}
+/* Caixa de previsão */
+.previsao-box {
+    background-color: rgba(58, 138, 175, 0.2); /* 20% de transparência */
+    border-radius: 10px; /* bordas levemente arredondadas */
+    padding: 15px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between; /* texto à esquerda, ícone à direita */
+    align-items: center;
+}
+
+.previsao-box .texto {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo específico do h3 dentro da caixa */
+.previsao-box .texto h3 {
+    margin: 0;
+    font-size: 40px;     /* tamanho do título */
+    color: #ffffff;      /* cor do título */
+    font-weight: bold;   /* negrito */
+}
+
+/* Estilo específico dos parágrafos dentro da caixa */
+.previsao-box .texto p {
+    margin: 0;
+    font-size: 24px;     /* tamanho do texto */
+    color: #ffffff;      /* cor do texto */
+}
+.previsao-box img.icon {
+    height: 450px;  /* tamanho do ícone */
+    width: 450px;
+}
+/* Caixa mini da previsão */
+.previsao-box-mini {
+    background-color: rgba(58,138,175,0.2);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    display: inline-flex;      /* lado a lado */
+    align-items: center;
+    vertical-align: top;       /* alinha caixas com alturas diferentes */
+    width: 300px;
+}
+
+/* Container das caixas (opcional, para centralizar todas) */
+.previsao-box-container {
+    text-align: center;       /* centraliza horizontalmente */
+}
+
+.previsao-box-mini .texto span:first-child {
+    font-weight: bold;
+}
