@@ -1,5 +1,7 @@
 import requests
-from api import API_key
+import os
+API_key = os.getenv("OPENWEATHER_API_KEY")
+
 
 def clima_atual(cidade):  
     url = f"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={API_key}&units=metric&lang=pt_br"
