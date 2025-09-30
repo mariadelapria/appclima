@@ -5,9 +5,10 @@
     #D9F0FF 20%,  
     #A7D8FF 45%, 
     #FFD6A6 70%,  
-    #8EA7D9 85% );
+    #8EA7D9 85%);
     color: #005969;   
 }
+
 /* Estilo do título principal */
 h1 {
     font-size: 200px;              
@@ -15,21 +16,27 @@ h1 {
     text-align: center;     
     margin-bottom: 20px;   
 }
-/* Container externo para manter as caixas em linha */
+
+/* Container externo das caixas */
 .previsao-container {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;      
+    gap: 15px;
+    justify-content: center;
     overflow-x: auto; 
 }
-/* Caixa de previsão */
+
+/* Caixa principal */
 .previsao-box {
-    background-color: rgba(58, 138, 175, 0.2);
+    background-color: rgba(58,138,175,0.2);
     border-radius: 10px; 
     padding: 15px;
-    margin: 10px 0;
     display: flex;
+    flex-direction: row;
     justify-content: space-between; 
     align-items: center;
+    width: 400px;       
+    max-width: 90vw;    
 }
 
 .previsao-box .texto {
@@ -37,7 +44,6 @@ h1 {
     flex-direction: column;
 }
 
-/* Estilo específico do h3 dentro da caixa */
 .previsao-box .texto h3 {
     margin: 0;
     font-size: 40px;    
@@ -45,33 +51,48 @@ h1 {
     font-weight: bold;   
 }
 
-/* Estilo específico dos parágrafos dentro da caixa */
 .previsao-box .texto p {
     margin: 0;
     font-size: 24px;     
     color: #ffffff;      
 }
+
 .previsao-box img.icon {
-    height: 250px;  
+    height: 150px;  
     width: auto;
 }
-/* Caixa mini da previsão */
+
+/* Caixa mini da previsão diária */
 .previsao-box-mini {
     background-color: rgba(58,138,175,0.2);
     border-radius: 10px;
     padding: 10px;
-    margin: 5px;
-    display: inline-flex;     
+    display: flex;     
     align-items: center;
-    vertical-align: top;      
-    width: 300px;
+    width: 400px;       
+    max-width: 90vw;     
+    gap: 10px;
 }
 
- 
-.previsao-box-container {
-    text-align: center;      
+.previsao-box-mini .texto {
+    display: flex;
+    flex-direction: column;
 }
 
 .previsao-box-mini .texto span:first-child {
     font-weight: bold;
+}
+
+/* Gráficos responsivos */
+[data-testid="stPlotlyChart"] {
+    width: 100% !important;  
+    max-width: 500px;         
+    height: auto !important;
+}
+
+/* Para telas maiores (PC) */
+@media (min-width: 768px) {
+    .previsao-box, .previsao-box-mini {
+        width: 500px;      
+    }
 }
