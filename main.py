@@ -10,7 +10,7 @@ from io import BytesIO
 st.title("Clima Tempo")
 
 
-API_key = st.secrets["OPENWEATHER_API_KEY"] 
+API_key = st.secrets["general"]["OPENWEATHER_API_KEY"] 
 
 cidade = st.text_input("Busque uma cidade:")
 
