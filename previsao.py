@@ -10,10 +10,13 @@ def previsao_5dias(cidade, api_key):
         return None
 
     previsoes = {}
-    for item in res_5dias['list']:
-        data = item['dt_txt'].split(" ")[0]
-        temp = item['main']['temp']
-        desc = item['weather'][0]['description']
+    for item in res_5dias.get('list', []):
+        data = item.get('dt_txt', '0000-00-00').split(" ")[0]
+        main = item.get('main', {})
+        weather = item.get('weather', [{}])[0]
+
+        temp = main.get('temp', 0)
+        desc = weather.get('description', '–')
 
         if data not in previsoes:
             previsoes[data] = {"temp_min": temp, "temp_max": temp, "desc": desc}
@@ -29,5 +32,5 @@ def previsao_5dias(cidade, api_key):
     for dia in dias:
         info = previsoes[dia]
         print(f"{dia:<12} | {info['desc']:<15} | {info['temp_min']:<8.1f} | {info['temp_max']:<8.1f}")
-    
+
     return previsoes
