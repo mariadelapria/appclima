@@ -1,6 +1,7 @@
 import requests
 import time 
-from api import API_key
+import os
+API_key = os.getenv("OPENWEATHER_API_KEY")
 
 def previsao_5dias(cidade):
     url_5dias = f"http://api.openweathermap.org/data/2.5/forecast?q={cidade}&appid={API_key}&units=metric&lang=pt_br"
