@@ -9,37 +9,30 @@ from io import BytesIO
 
 st.title("Clima Tempo")
 
-# Barra de pesquisa
 cidade = st.text_input("Busque uma cidade:")
 
-# Carrega a imagem e converte para base64
-icone_path = "C:\\Users\\maria\\Downloads\\previsaoclima.png"
+icone_path = "imagem/previsaoclima.png"
 img = Image.open(icone_path)
 buffered = BytesIO()
 img.save(buffered, format="PNG")
 img_b64 = base64.b64encode(buffered.getvalue()).decode()
 
-# Aplica o CSS
 with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Valores iniciais (zerados)
 desc = "–"
 temp = "–"
 vento_kmh = "–"
 
-# Se o usuário clicar em buscar cidade
 if st.button("Buscar clima") and cidade:
     resultado = clima_atual(cidade)
     if resultado:
         cidade, temp, vento_kmh, desc, lat, lon = resultado
-        # Formata vento
         vento_kmh = f"{float(vento_kmh):.1f} km/h"
     else:
         st.warning("Não foi possível obter o clima desta cidade.")
         temp = vento_kmh = desc = "–"
 
-# Caixa de previsão com ícone grande (sempre visível)
 st.markdown(f"""
 <div class="previsao-box">
     <div class="texto">
@@ -52,31 +45,25 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Previsão de 5 dias (excluindo o primeiro dia)
 if cidade and desc != "–":
     previsoes = previsao_5dias(cidade)
     if previsoes:
-        # Remove o primeiro dia
         previsoes_restantes = list(previsoes.items())[1:]
 
         st.subheader("Previsão para os próximos 5 dias")
 
-        # Cria as caixas
         for dia, info in previsoes_restantes[:5]:
-            # Escolhe o ícone conforme descrição
             desc_dia = info["desc"]
             if "chuva" in desc_dia.lower():
-                icone_path = "C:/Users/maria/Downloads/chuva png.png"
+                icone_path = "imagem/chuva_png.png"
             else:
-                icone_path = "C:/Users/maria/Downloads/sol e nuvem.png"
+                icone_path = "imagem/sol_e_nuvem.png"
 
-            # Converte ícone para base64
             img = Image.open(icone_path)
             buffered = BytesIO()
             img.save(buffered, format="PNG")
             img_b64 = base64.b64encode(buffered.getvalue()).decode()
 
-            # Caixa com fundo transparente e ícone
             st.markdown(f"""
             <div class="previsao-box-mini" style="background-color: rgba(58,138,175,0.2); border-radius: 10px; padding: 10px; margin: 5px; display: flex; align-items: center; width: 700px;">
                 <img src="data:image/png;base64,{img_b64}" style="width:50px; height:50px; margin-right: 10px;">
