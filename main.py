@@ -68,7 +68,7 @@ if cidade and desc != "–":
             img_b64 = base64.b64encode(buffered.getvalue()).decode()
 
             st.markdown(f"""
-            <div class="previsao-box-mini" style="background-color: rgba(58,138,175,0.2); border-radius: 10px; padding: 10px; margin: 5px; display: flex; align-items: center; width: 500px;">
+            <div class="previsao-box-mini" style="background-color: rgba(58,138,175,0.2); border-radius: 10px; padding: 10px; margin: 5px; display: flex; align-items: center; width: 700px;">
                 <img src="data:image/png;base64,{img_b64}" style="width:50px; height:50px; margin-right: 10px;">
                 <div style="display: flex; flex-direction: column;">
                     <span style="font-weight:bold;">{dia}</span>
